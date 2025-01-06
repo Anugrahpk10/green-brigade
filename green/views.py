@@ -9,8 +9,11 @@ from .models import Profile
 def home(request):
     return render(request,"home.html")
 
+
 def login(request):
     return render(request,"login.html")
+
+
 
 def user_registration(request):
     if request.method == "POST":
@@ -46,7 +49,7 @@ def user_registration(request):
             user_details = reg_form.save(commit=False)
             user_details.profile = profile
             user_details.save()
-            return redirect('home')  # Redirect to a success page
+            return redirect('login')  # Redirect to a success page
         else:
             print(reg_form.errors)
             return render(request, 'userregistration.html', {
