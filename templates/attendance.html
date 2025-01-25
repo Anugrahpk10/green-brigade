@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .add-btn {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .add-btn:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9ecef;
+        }
+
+        .actions {
+            text-align: right;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-edit {
+            background-color: #28a745;
+        }
+
+        .btn-edit:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<h1>Attendance Details</h1>
+
+<a href="{% url 'attendanceadd' %}" class="add-btn">+ Add Attendance</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Date</th>
+            <th>Activity</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Example attendance rows -->
+        <tr>
+            <td>John Doe</td>
+            <td>2025-01-24</td>
+            <td>Math Exam</td>
+            <td>Present</td>
+            <td class="actions">
+                <button class="btn btn-edit" onclick="editAttendance(1)">Edit</button>
+                <button class="btn btn-delete" onclick="deleteAttendance(1)">Delete</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Jane Smith</td>
+            <td>2025-01-23</td>
+            <td>Science Project</td>
+            <td>Absent</td>
+            <td class="actions">
+                <button class="btn btn-edit" onclick="editAttendance(2)">Edit</button>
+                <button class="btn btn-delete" onclick="deleteAttendance(2)">Delete</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Michael Johnson</td>
+            <td>2025-01-22</td>
+            <td>History Presentation</td>
+            <td>Present</td>
+            <td class="actions">
+                <button class="btn btn-edit" onclick="editAttendance(3)">Edit</button>
+                <button class="btn btn-delete" onclick="deleteAttendance(3)">Delete</button>
+            </td>
+        </tr>
+        <!-- Additional rows will be populated dynamically using Django's template tags if needed -->
+        {% for attendance in attendances %}
+        <tr>
+            <td>{{ attendance.student.profile.username }}</td> <!-- Assuming the student model has a profile with username -->
+            <td>{{ attendance.date }}</td>
+            <td>
+                {% if attendance.activity %}
+                    {{ attendance.activity.name }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+            <td>{{ attendance.status }}</td>
+            <td class="actions">
+                <button class="btn btn-edit" onclick="editAttendance({{ attendance.id }})">Edit</button>
+                <button class="btn btn-delete" onclick="deleteAttendance({{ attendance.id }})">Delete</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    function editAttendance(attendanceId) {
+        alert(`Edit functionality triggered for attendance ID: ${attendanceId}`);
+        // Add your logic here for editing attendance
+    }
+
+    function deleteAttendance(attendanceId) {
+        const confirmDelete = confirm(`Are you sure you want to delete attendance ID: ${attendanceId}?`);
+        if (confirmDelete) {
+            alert(`Delete functionality triggered for attendance ID: ${attendanceId}`);
+            // Add your logic here for deleting attendance
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+    {% extends 'admin_base.html' %}
+    <!DOCTYPE html>
+    {% load static %}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Information Management</title>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+            }
+            th, td {
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+            }
+                background-color: #f4f4f4;
+            }
+            .action-btn {
+                margin: 5px;
+                padding: 8px 12px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+            .action-btn:hover {
+                background-color: #45a049;
+            }
+            .delete-btn {
+                background-color: #f44336;
+            }
+            .delete-btn:hover {
+                background-color: #e53935;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>User Information Management</h1>
+
+        <section>
+            <h2>Overview</h2>
+            <p>Total Users: {{ users.count }}</p>
+        </section>
+
+        <!-- Add User Button -->
+        <a href="{% url 'admin_appoinment' %}"><button class="action-btn">Add User</button></a>
+
+        <!-- User Information Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Serial Number</th>
+                    <th>Name</th>
+                    <th>User ID</th>
+                    <th>College</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.user_id }}</td>
+                    <td>{{ user.college }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <a href="{% url 'edit_user' user.user_id %}">
+                            <button class="action-btn">Edit</button>
+                        </a>
+                        <a href="{% url 'delete_user' user.user_id %}">
+                            <button class="delete-btn">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </body>
+    </html>

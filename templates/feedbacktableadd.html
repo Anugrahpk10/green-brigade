@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .add-btn {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .add-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .form-container h2 {
+            margin-bottom: 15px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .form-container label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .form-container input, .form-container textarea, .form-container select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .form-container button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9ecef;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-edit {
+            background-color: #28a745;
+        }
+
+        .btn-edit:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+
+        .actions {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Feedback Details</h1>
+
+<!-- Feedback Form -->
+<div class="form-container">
+    <h2>Add Feedback</h2>
+    <form action="{% url 'feedbacktable' %}" method="post">
+        {% csrf_token %}
+        <label for="student_name">Student Name</label>
+        <input type="text" id="student_name" name="student_name" required>
+
+        <label for="activity">Activity</label>
+        <select id="activity" name="activity" required>
+            <option value="">Select Activity</option>
+            <option value="Math Exam">Math Exam</option>
+            <option value="Science Project">Science Project</option>
+            <option value="History Presentation">History Presentation</option>
+        </select>
+
+        <label for="feedback">Feedback</label>
+        <textarea id="feedback" name="feedback" rows="4" required></textarea>
+
+        <button type="submit">Submit Feedback</button>
+    </form>
+</div>
+
+<!-- Feedback Table -->
+<a href="{% url 'feedbacktable' %}" class="add-btn">+ Add Feedback</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Created At</th>
+            <th>Activity</th>
+            <th>Feedback</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Example feedback rows -->
+        <tr>
+            <td>John Doe</td>
+            <td>2025-01-24</td>
+            <td>Math Exam</td>
+            <td>Great performance, well done!</td>
+            <td class="actions">
+                <button class="btn btn-edit" onclick="editFeedback(1)">Edit</button>
+                <button class="btn btn-delete" onclick="deleteFeedback(1)">Delete</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Jane Smith</td>
+            <td>2025-01-23</td>
+            <td>Science Project</td>
+            <td>Needs improvement in presentation skills.</td>
+            <td class="actions">
+                <button class="btn btn-edit" onclick="editFeedback(2)">Edit</button>
+                <button class="btn btn-delete" onclick="deleteFeedback(2)">Delete</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Michael Johnson</td>
+            <td>2025-01-22</td>
+            <td>History Presentation</td>
+            <td>Excellent research, but could improve public speaking.</td>
+            <td class="actions">
+                <button class="btn btn-edit" onclick="editFeedback(3)">Edit</button>
+                <button class="btn btn-delete" onclick="deleteFeedback(3)">Delete</button>
+            </td>
+        </tr>
+        {% for feedback in feedbacks %}
+            <tr>
+                <td>{{ feedback.student.name }}</td>
+                <td>{{ feedback.created_at }}</td>
+                <td>
+                    {% if feedback.activity %}
+                        {{ feedback.activity.name }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td> 
+                <td>{{ feedback.feedback }}</td>
+                <td class="actions">
+                    <button class="btn btn-edit" onclick="editFeedback({{ feedback.id }})">Edit</button>
+                    <button class="btn btn-delete" onclick="deleteFeedback({{ feedback.id }})">Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    function editFeedback(feedbackId) {
+        alert(`Edit functionality triggered for feedback ID: ${feedbackId}`);
+        // Add your logic here for editing
+    }
+
+    function deleteFeedback(feedbackId) {
+        const confirmDelete = confirm(`Are you sure you want to delete feedback ID: ${feedbackId}?`);
+        if (confirmDelete) {
+            alert(`Delete functionality triggered for feedback ID: ${feedbackId}`);
+            // Add your logic here for deletion
+        }
+    }
+</script>
+
+</body>
+</html>

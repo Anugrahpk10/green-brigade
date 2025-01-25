@@ -1,0 +1,57 @@
+<div class="sidebar">
+    <div class="sidebar-header">
+        <h2>Admin Dashboard</h2>
+    </div>
+    <ul class="sidebar-menu">
+        <li><a href="">Update Password</a></li>
+        <li><a href="">Certificate</a></li>
+        <li><a href="{% url 'manage_appoinment' %}">Manage Appointment</a></li>
+    </ul>
+</div>
+
+<style>
+    /* Sidebar styles */
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        background-color: #343a40;
+        color: white;
+        padding: 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    .sidebar-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .sidebar-header h2 {
+        font-size: 1.8em;
+        color: #28a745;
+    }
+
+    .sidebar-menu {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sidebar-menu li {
+        margin: 20px 0;
+    }
+
+    .sidebar-menu li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1em;
+        padding: 12px;
+        border-radius: 5px;
+        display: block;
+        transition: background-color 0.3s ease;
+    }
+
+    .sidebar-menu li a:hover {
+        background-color: #007bff;
+    }
+</style>

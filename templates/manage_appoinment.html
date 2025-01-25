@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Teacher Table</title>
+    <style>
+        /* Add button styling */
+        .add-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .add-btn:hover {
+            background-color: #218838;
+        }
+        /* Table and general styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .edit-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .edit-btn:hover {
+            background-color: #45a049;
+        }
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        .delete-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9;">
+
+    <!-- Add button in the top-left corner -->
+    <a href="{% url 'edit_teacherform' %}" class="add-btn">+ Add</a>
+
+    <h2 style="text-align: center; font-size: 24px; margin-bottom: 20px;">Teacher Information Table</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Serial No</th>
+                <th>Name</th>
+                <th>User ID</th>
+                <th>College</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>John Doe</td>
+                <td>JD123</td>
+                <td>ABC University</td>
+                <td>123-456-7890</td>
+                <td>johndoe@example.com</td>
+                <td>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Jane Smith</td>
+                <td>JS456</td>
+                <td>XYZ College</td>
+                <td>987-654-3210</td>
+                <td>janesmith@example.com</td>
+                <td>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Michael Johnson</td>
+                <td>MJ789</td>
+                <td>LMN University</td>
+                <td>555-123-4567</td>
+                <td>michaelj@example.com</td>
+                <td>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

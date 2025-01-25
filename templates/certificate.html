@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Approval</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f7f9fc;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .add-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .add-btn:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9ecef;
+        }
+
+        .actions {
+            text-align: center;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-edit {
+            background-color: #28a745;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        .btn-approve {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-reject {
+            background-color: #dc3545;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-edit:hover, .btn-delete:hover, .btn-approve:hover, .btn-reject:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+        .actions button {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Certificate Approval</h1>
+
+<a href="{% url 'certificate' %}" class="add-btn">+ Add New Student</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Student ID</th> <!-- Added Student ID column -->
+            <th>Certificate Name</th>
+            <th>Class</th>
+            <th>Approval Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for certificate in certificates %}
+        <tr>
+            <td>{{ certificate.student.username }}</td> <!-- Student Name -->
+            <td>{{ certificate.student.student_id }}</td> <!-- Assuming you have a student_id field in StudentDetails model -->
+            <td>{{ certificate.name }}</td>
+            <td>{{ certificate.student_class }}</td>
+            <td>
+                {% if certificate.certificateapproval.approved %}
+                    Approved on {{ certificate.certificateapproval.approval_date }}
+                {% else %}
+                    Pending
+                {% endif %}
+            </td>
+            <td class="actions">
+                {% if not certificate.certificateapproval.approved %}
+                    <button class="btn btn-approve" onclick="approveCertificate({{ certificate.certificateapproval.id }})">Approve</button>
+                    <button class="btn btn-reject" onclick="rejectCertificate({{ certificate.certificateapproval.id }})">Reject</button>
+                {% else %}
+                    <button class="btn btn-reject" onclick="rejectCertificate({{ certificate.certificateapproval.id }})">Reject</button>
+                {% endif %}
+                <button class="btn btn-edit" onclick="editCertificate({{ certificate.id }})">Edit</button>
+                <button class="btn btn-delete" onclick="deleteCertificate({{ certificate.id }})">Delete</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    function approveCertificate(id) {
+        const confirmApprove = confirm("Are you sure you want to approve this certificate?");
+        if (confirmApprove) {
+            alert("Certificate approved!");
+        }
+    }
+
+    function rejectCertificate(id) {
+        const confirmReject = confirm("Are you sure you want to reject this certificate?");
+        if (confirmReject) {
+            alert("Certificate rejected!");
+        }
+    }
+
+    function editCertificate(id) {
+        const editUrl = `/edit_certificate/${id}/`;  // Change to your edit URL logic
+        window.location.href = editUrl;
+    }
+
+    function deleteCertificate(id) {
+        const confirmDelete = confirm("Are you sure you want to delete this certificate?");
+        if (confirmDelete) {
+            alert("Certificate deleted!");
+            // You can implement AJAX to delete or redirect
+        }
+    }
+</script>
+
+</body>
+</html>
+
+

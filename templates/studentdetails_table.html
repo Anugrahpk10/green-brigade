@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .add-btn {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .add-btn:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9ecef;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-edit {
+            background-color: #28a745;
+        }
+
+        .btn-edit:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+
+        .actions {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'studentdetailsadd_table' %}" class="add-btn">+ Add</a>
+
+    <h1>Student Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Enrollment No</th>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Guardian</th>
+                <th>Address</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Aadhar No</th>
+                <th>Blood Group</th>
+                <th>Academic Year</th>
+                <th>Date of Birth</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Remarks</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Example student rows -->
+            <tr>
+                <td>101</td>
+                <td>John Doe</td>
+                <td>3rd</td>
+                <td>Jane Doe</td>
+                <td>1234 Elm Street</td>
+                <td>Male</td>
+                <td>20</td>
+                <td>1234-5678-9012</td>
+                <td>B+</td>
+                <td>2023-24</td>
+                <td>2003-05-14</td>
+                <td>+1 555 123 4567</td>
+                <td>john.doe@example.com</td>
+                <td>Excellent student</td>
+                <td class="actions">
+                    <button class="btn btn-edit" onclick="editStudent(101)">Edit</button>
+                    <button class="btn btn-delete" onclick="deleteStudent(101)">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>Mary Smith</td>
+                <td>2nd</td>
+                <td>Robert Smith</td>
+                <td>5678 Oak Avenue</td>
+                <td>Female</td>
+                <td>19</td>
+                <td>5678-1234-5678</td>
+                <td>O+</td>
+                <td>2023-24</td>
+                <td>2004-09-22</td>
+                <td>+1 555 987 6543</td>
+                <td>mary.smith@example.com</td>
+                <td>Great progress</td>
+                <td class="actions">
+                    <button class="btn btn-edit" onclick="editStudent(102)">Edit</button>
+                    <button class="btn btn-delete" onclick="deleteStudent(102)">Delete</button>
+                </td>
+            </tr>
+            <!-- Add more rows dynamically using Django's template tags -->
+            {% for student in students %}
+            <tr>
+                <td>{{ student.enrollment_no }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.year }}</td>
+                <td>{{ student.guardian }}</td>
+                <td>{{ student.address }}</td>
+                <td>{{ student.gender }}</td>
+                <td>{{ student.age }}</td>
+                <td>{{ student.aadhar_no }}</td>
+                <td>{{ student.blood_group }}</td>
+                <td>{{ student.academic_year }}</td>
+                <td>{{ student.date_of_birth }}</td>
+                <td>{{ student.phone }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.remarks }}</td>
+                <td class="actions">
+                    <button class="btn btn-edit" onclick="editStudent({{ student.enrollment_no }})">Edit</button>
+                    <button class="btn btn-delete" onclick="deleteStudent({{ student.enrollment_no }})">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        function editStudent(studentId) {
+            alert(`Edit functionality triggered for student ID: ${studentId}`);
+            // Add your logic here for editing
+        }
+
+        function deleteStudent(studentId) {
+            const confirmDelete = confirm(`Are you sure you want to delete student ID: ${studentId}?`);
+            if (confirmDelete) {
+                alert(`Delete functionality triggered for student ID: ${studentId}`);
+                // Add your logic here for deletion
+            }
+        }
+    </script>
+</body>
+</html>

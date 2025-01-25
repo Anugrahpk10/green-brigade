@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <link href="{% static 'css/user_registration.css' %}" rel="stylesheet">
+</head>
+    <body>
+    <form class="registration-form" action="{% url 'userregistration' %}" method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" placeholder="Enter your age" required>
+        </div>
+
+        <div class="form-group">
+            <label>Gender</label>
+            <input type="radio" id="male" name="gender" value="male" required>
+            <label for="male" class="gender-label">Male</label>
+
+            <input type="radio" id="female" name="gender" value="female" required>
+            <label for="female" class="gender-label">Female</label>
+
+            <input type="radio" id="other" name="gender" value="other" required>
+            <label for="other" class="gender-label">Other</label>
+        </div>
+
+        <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" required>
+        </div>
+
+        <div class="form-group">
+            <label for="aadhar">Aadhar Number</label>
+            <input type="text" id="aadhar" name="aadhar" placeholder="Enter your Aadhar number" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Set Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="submit-btn">Register</button>
+    </form>
+</body>
+</html>

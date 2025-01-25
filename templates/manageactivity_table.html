@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Activities</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        /* Add Button Styling */
+        .btn-add {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-add:hover {
+            background-color: #0056b3;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Action Buttons Styling */
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .actions a {
+            padding: 8px 15px;
+            margin: 0;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .actions .edit-btn {
+            background-color: #28a745;
+            color: #ffffff;
+        }
+
+        .actions .edit-btn:hover {
+            background-color: #218838;
+        }
+
+        .actions .delete-btn {
+            background-color: #dc3545;
+            color: #ffffff;
+        }
+
+        .actions .delete-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Activity Management</h1>
+        <a href="{% url 'manageactivityadd' %}" class="btn-add">+ Add New Activity</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Year</th>
+                    <th>Action Plan</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example Activity -->
+                <tr>
+                    <td>1</td>
+                    <td>Tree Plantation Drive</td>
+                    <td>Environment</td>
+                    <td>2025</td>
+                    <td>
+                        <a href="action_plan.pdf" target="_blank">Download</a>
+                    </td>
+                    <td>In Progress</td>
+                    <td class="actions">
+                        <a href="/edit/1" class="edit-btn">Edit</a>
+                        <a href="/delete/1" class="delete-btn">Delete</a>
+                    </td>
+                </tr>
+                <!-- Empty Placeholder -->
+                <tr>
+                    <td colspan="7">No more activities found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
