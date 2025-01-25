@@ -7,6 +7,7 @@ from. import views
 
 urlpatterns = [
 
+<<<<<<< HEAD
     path("",views.home,name="home"),
     path("login/",views.login,name='login'),
     path("admin_dashboard/", views.admin_dashboard, name="admin_dashboard"),
@@ -35,6 +36,13 @@ urlpatterns = [
 
 
 
+=======
+    path("home/",views.home,name='home'),
+    path("login/",views.login,name='login'),
+    path("userregistration/",views.user_registration,name='userregistration'),
+    # path("coordinator_registration/",views.coordinator_registration),
+    
+>>>>>>> 06145b4548d87266d39c21653876bcdb20789920
 
 
 ]

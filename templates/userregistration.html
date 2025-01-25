@@ -1,16 +1,32 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 {% load static %}
 <html lang="en">
    
+=======
+<html lang="en">
+    {% load static %}
+>>>>>>> 06145b4548d87266d39c21653876bcdb20789920
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
     <link href="{% static 'css/user_registration.css' %}" rel="stylesheet">
 </head>
+<<<<<<< HEAD
     <body>
     <form class="registration-form" action="{% url 'userregistration' %}" method="post">
         {% csrf_token %}
+=======
+<body>
+    <form class="registration-form" method="post" action="{% url 'userregistration' %}">
+        {% csrf_token %}
+        <h2>User Registration</h2>
+
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+>>>>>>> 06145b4548d87266d39c21653876bcdb20789920
 
         <div class="form-group">
             <label for="fullname">Full Name</label>
