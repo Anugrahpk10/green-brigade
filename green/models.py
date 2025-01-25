@@ -1,9 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser,Group,Permission
-<<<<<<< HEAD
 from django.db import models
-=======
->>>>>>> 06145b4548d87266d39c21653876bcdb20789920
 
 # Create your models here.
 
@@ -38,11 +35,7 @@ class Profile(AbstractUser):
     first_name = models.CharField(max_length=150, blank=True, null=True)
     last_name = models.CharField(max_length=150, blank=True, null=True)
     role=models.CharField(max_length=15,choices=RoleChoices.choices)
-<<<<<<< HEAD
     emial=models.EmailField(unique=True)
-=======
-    email=models.EmailField(unique=True)
->>>>>>> 06145b4548d87266d39c21653876bcdb20789920
     phone=models.CharField(max_length=15,null=True,blank=True)
     
 
@@ -60,7 +53,6 @@ class Profile(AbstractUser):
 
     
     def __str__(self):  
-<<<<<<< HEAD
             return self.username    
     
 
@@ -84,26 +76,6 @@ class StudentDetails(models.Model):
 
     def __str__(self):
         return self.profile.username
-=======
-            return self.username     
-
-
-
-
-        
-
-
-class UserDetails(models.Model):
-    profile=models.OneToOneField('Profile',on_delete=models.CASCADE,null=True,blank=True)
-    address=models.TextField(null=True, blank=True)
-    gender=models.CharField(max_length=10, blank=True, null=True)
-    age=models.IntegerField(blank=True, null=True,)
-    aadhar_no=models.IntegerField(null=True, blank=True)
-    blood_group=models.CharField(max_length=15, null=True, blank=True)
-    academic_year=models.IntegerField(null=True, blank=True)
-    def __str__(self):  
-              return self.profile.username     
->>>>>>> 06145b4548d87266d39c21653876bcdb20789920
 
    
 class coordinatorDetail(models.Model):
@@ -112,15 +84,10 @@ class coordinatorDetail(models.Model):
       gender=models.CharField(max_length=10, blank=True, null=True)
       age=models.IntegerField(blank=True, null=True)
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 06145b4548d87266d39c21653876bcdb20789920
       def __str__(self):  
               return self.profile.username     
 
 
-<<<<<<< HEAD
 class Certificate(models.Model):
       student=models.ForeignKey(StudentDetails,on_delete=models.CASCADE)
       name=models.CharField(max_length=250,null=True,blank=True)
@@ -163,11 +130,4 @@ class Attendence(models.Model):
       def __str__(self):  
               return self.student.profile.username    
 
-=======
-
-        
-
-
-
->>>>>>> 06145b4548d87266d39c21653876bcdb20789920
 

@@ -3,10 +3,6 @@
 import os
 import sys
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 06145b4548d87266d39c21653876bcdb20789920
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'greenbrigade.settings')
@@ -22,8 +18,4 @@ def main():
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
     main()
-=======
-    main()
->>>>>>> 06145b4548d87266d39c21653876bcdb20789920
